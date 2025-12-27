@@ -1,0 +1,14 @@
+import torch
+from transformers import BertTokenizer,BertModel
+
+tokenizer=BertTokenizer.from_pretrained("bert-base-uncased")
+model=BertModel.from_pretrained("bert-base-uncased")
+
+sentences=["Hi","How are you"]
+
+input=tokenizer(sentences,return_tensors="pt",padding=True,truncation=True)
+
+with torch_no_grad():
+   outputs=model(**input)
+   sentence_embeddings=outputs.last_hidden_state(dim=1)
+   print(sentence_embeddings)
